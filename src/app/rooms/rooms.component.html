@@ -1,5 +1,46 @@
-<p>Number of Rooms:</p>
+<h2>Rooms details</h2>
+<hr />
 
-<div [innerText]="numberOfRooms"></div>
+<!-- <div [innerText]="numberOfRooms"></div> -->
+
+<div>
+  Total rooms:
+  <span
+    style="
+      background-color: rgba(116, 39, 39, 50);
+      padding: 0.25rem;
+      border-radius: 5px;
+    "
+    >{{ rooms.totalRooms }}</span
+  >
+</div>
+<div *ngIf="rooms.availableRooms > 0">
+  Rooms available to book:
+  <span
+    style="
+      background-color: rgba(116, 39, 39, 50);
+      padding: 0.25rem;
+      border-radius: 5px;
+    "
+    >{{ rooms.availableRooms }}</span
+  >
+</div>
+
+<p *ngIf="rooms.availableRooms === 0">No rooms available!</p>
+
+<button (click)="availableModifier.remove()">remove</button>
+<button (click)="availableModifier.add()">add</button>
+
+<div *ngIf="rooms.bookedRooms > 0">
+  Rooms available to book:
+  <span
+    style="
+      background-color: rgba(116, 39, 39, 50);
+      padding: 0.25rem;
+      border-radius: 5px;
+    "
+    >{{ rooms.bookedRooms }}</span
+  >
+</div>
 
 <!-- document.getElementById('numberOfRooms').innerText = numberOfRooms; -->
