@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Modifier, Room } from './room';
+import { Modifier, Room, RoomType } from './room';
 
 @Component({
   selector: 'happ-rooms',
@@ -14,6 +14,28 @@ export class RoomsComponent implements OnInit {
     availableRooms: 10,
     bookedRooms: 5,
   };
+
+  roomsList: RoomType[] = [
+    {
+      roomNum: 1,
+      roomType: 'Normal Room',
+      amenities: 'Air Conditioner, Free Wi-Fi, Normal Shower.',
+      price: 250,
+    },
+    {
+      roomNum: 2,
+      roomType: 'Deluxe Room',
+      amenities: 'Air Conditioner, Free Wi-Fi, TV, Deluxe Bed, Normal Shower.',
+      price: 315,
+    },
+    {
+      roomNum: 3,
+      roomType: 'Private Room',
+      amenities:
+        'Air Conditioner, Free Wi-Fi, TV, Kinig-Sized Bed, Shower & Bathtub, Kitchen.',
+      price: 400,
+    },
+  ];
 
   constructor() {}
 
