@@ -22,6 +22,9 @@
       padding: 0.25rem;
       border-radius: 5px;
     "
+    [ngStyle]="{
+      color: rooms.availableRooms > rooms.bookedRooms ? 'green' : 'red'
+    }"
     >{{ rooms.availableRooms }}</span
   >
 </div>
@@ -42,5 +45,29 @@
     >{{ rooms.bookedRooms }}</span
   >
 </div>
+
+<hr />
+<ul>
+  <li
+    *ngFor="let room of roomsList; let e = even; let o = odd; let i = index"
+    [ngClass]="e ? 'even' : 'odd'"
+  >
+    <div class="room-header">
+      {{ room.roomNum }} - {{ room.roomType | uppercase }}
+    </div>
+    <div class="room-desc">
+      {{ room.amenities | titlecase }}
+    </div>
+    <div>{{ room.price | currency : "MYR" }}</div>
+    <div>{{ room.date | date }}</div>
+    <div>{{ room.date | date : "medium" }}</div>
+    <div>{{ room.date | date : "long" }}</div>
+    <div>{{ room.date | date : "dd-MMM-YY" }}</div>
+    <div>Ratings: {{ room.ratings }}</div>
+
+    <!-- ngFor also allow properties that can be used while looping: -->
+    <div>Index: {{ i }} = {{ e ? "Even" : "odd" }}</div>
+  </li>
+</ul>
 
 <!-- document.getElementById('numberOfRooms').innerText = numberOfRooms; -->

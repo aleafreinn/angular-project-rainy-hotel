@@ -1,10 +1,25 @@
 <main>
   <happ-header></happ-header>
-  <h1 class="myTitle">
+  <div [ngSwitch]="role">
+    <div *ngSwitchCase="'Admin'">
+      <happ-rooms></happ-rooms>
+    </div>
+    <div *ngSwitchCase="'User'">
+      <happ-my-component></happ-my-component>
+      <p>Hello User! Ready to book your night?</p>
+    </div>
+    <div *ngSwitchDefault>
+      <p>
+        You won't be seeing me here but if everything went wrong, I'll be here
+      </p>
+    </div>
+  </div>
+  <button (click)="roleSwitcher()">
+    Click me to change role. Current Role: {{ role }}
+  </button>
+  <!-- <h1 class="myTitle">
     I am using <span style="color: magenta">Angular</span> for the first time!!!
-  </h1>
-  <happ-my-component></happ-my-component>
-  <happ-rooms></happ-rooms>
+  </h1> -->
 </main>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

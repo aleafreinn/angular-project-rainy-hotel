@@ -26,5 +26,11 @@ import { Component } from '@angular/core';
   // ],
 })
 export class AppComponent {
-  title = 'hotelAppv13';
+  title: string = 'hotelAppv13';
+
+  role: string = 'Admin';
+
+  roleSwitcher() {
+    this.role = this.role === 'User' ? 'Admin' : 'User';
+  }
 }

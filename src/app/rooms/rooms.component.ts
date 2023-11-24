@@ -21,19 +21,25 @@ export class RoomsComponent implements OnInit {
       roomType: 'Normal Room',
       amenities: 'Air Conditioner, Free Wi-Fi, Normal Shower.',
       price: 250,
+      date: new Date('2023-10-30'), //for learning purposes only
+      ratings: 1.2,
     },
     {
       roomNum: 2,
       roomType: 'Deluxe Room',
       amenities: 'Air Conditioner, Free Wi-Fi, TV, Deluxe Bed, Normal Shower.',
       price: 315,
+      date: new Date('2023-11-04'),
+      ratings: 3.6,
     },
     {
       roomNum: 3,
       roomType: 'Private Room',
       amenities:
-        'Air Conditioner, Free Wi-Fi, TV, Kinig-Sized Bed, Shower & Bathtub, Kitchen.',
+        'Air Conditioner, Free Wi-Fi, TV, King-Sized Bed, Shower & Bathtub, Kitchen.',
       price: 400,
+      date: new Date('2023-12-16'),
+      ratings: 4.4,
     },
   ];
 

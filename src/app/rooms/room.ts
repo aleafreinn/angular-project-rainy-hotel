@@ -14,4 +14,6 @@ export interface RoomType {
   roomType: string;
   amenities: string;
   price: number;
+  date: Date;
+  ratings: number;
 }
