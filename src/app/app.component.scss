@@ -13,8 +13,9 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
-  margin: none;
+  height: fit-content;
+  min-height: 100vh;
+  margin: 0;
   & > .myTitle {
     color: #ffff88;
   }

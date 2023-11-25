@@ -1,3 +1,4 @@
+<happ-header></happ-header>
 <h2>Rooms details</h2>
 <hr />
 
@@ -46,28 +47,33 @@
   >
 </div>
 
-<hr />
-<ul>
-  <li
-    *ngFor="let room of roomsList; let e = even; let o = odd; let i = index"
-    [ngClass]="e ? 'even' : 'odd'"
-  >
-    <div class="room-header">
-      {{ room.roomNum }} - {{ room.roomType | uppercase }}
-    </div>
-    <div class="room-desc">
-      {{ room.amenities | titlecase }}
-    </div>
-    <div>{{ room.price | currency : "MYR" }}</div>
-    <div>{{ room.date | date }}</div>
-    <div>{{ room.date | date : "medium" }}</div>
-    <div>{{ room.date | date : "long" }}</div>
-    <div>{{ room.date | date : "dd-MMM-YY" }}</div>
-    <div>Ratings: {{ room.ratings }}</div>
+<!-- <div>
+  {{ roomsList | json }}
+</div> -->
 
-    <!-- ngFor also allow properties that can be used while looping: -->
-    <div>Index: {{ i }} = {{ e ? "Even" : "odd" }}</div>
-  </li>
+<hr />
+
+<button class="btn btn-primary" (click)="addRooms()">Add rooms</button>
+<button class="btn btn-primary" (click)="roomTitleHandler()">
+  change title
+</button>
+
+<div *ngIf="titleChangeCounter">
+  You changed the title {{ titleChangeCounter - 1 }} times!
+</div>
+
+<ul>
+  <happ-rooms-list
+    [rooms]="roomsList"
+    [title]="roomListTitle"
+    (roomSelected)="selectRoom($event)"
+    (changeCounter)="setChangeCounter($event)"
+  ></happ-rooms-list>
 </ul>
+
+<div *ngIf="highlightedRoom">
+  <div>You selected {{ highlightedRoom.roomType }}!</div>
+  <div>That will be {{ highlightedRoom.price | currency : "MYR" }}</div>
+</div>
 
 <!-- document.getElementById('numberOfRooms').innerText = numberOfRooms; -->

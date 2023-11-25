@@ -1,0 +1,25 @@
+<!-- <p>rooms-list works!</p> -->
+<h2>{{ title }}</h2>
+<li
+  *ngFor="let room of rooms; let e = even; let o = odd; let i = index"
+  [ngClass]="e ? 'even' : 'odd'"
+>
+  <div class="room-header">
+    {{ room.roomNum }} - {{ room.roomType | uppercase }}
+  </div>
+  <div class="room-desc">
+    {{ room.amenities | titlecase }}
+  </div>
+  <div>{{ room.price | currency : "MYR" }}</div>
+  <!-- 4:15:49 -->
+  <div>{{ room.date | date }}</div>
+  <div>{{ room.date | date : "medium" }}</div>
+  <div>{{ room.date | date : "long" }}</div>
+  <div>{{ room.date | date : "dd-MMM-YY" }}</div>
+
+  <div>Ratings: {{ room.ratings | number : "1.2-2" }}</div>
+
+  <!-- ngFor also allow properties that can be used while looping: -->
+  <div>Index: {{ i }} = {{ e ? "Even" : "odd" }}</div>
+  <button class="btn btn-primary" (click)="selectRoom(room)">Book now!</button>
+</li>

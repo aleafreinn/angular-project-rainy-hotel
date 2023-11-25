@@ -1,0 +1,17 @@
+.even {
+  & > .room-desc {
+    color: peachpuff;
+  }
+  & > .room-header {
+    color: peru;
+  }
+}
+
+.odd {
+  & > .room-desc {
+    color: skyblue;
+  }
+  & > .room-header {
+    color: darkcyan;
+  }
+}
