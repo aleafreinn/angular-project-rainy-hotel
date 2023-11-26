@@ -60,7 +60,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     // console.log(this.name);
     this.name.nativeElement.innerHTML =
       '<h2>Hello, im from native element.</h2>';
-    this.localStorage.setItem('name', 'Hilton Hotel');
+    this.localStorage.setItem('name', 'Local Rain Hotel');
   }
 
   ngAfterViewInit() {
