@@ -1,4 +1,6 @@
 <happ-header></happ-header>
+<happ-header></happ-header>
+<happ-header></happ-header>
 <h2>Rooms details</h2>
 <hr />
 
@@ -62,7 +64,7 @@
   You changed the title {{ titleChangeCounter - 1 }} times!
 </div>
 
-<ul>
+<ul *ngIf="toggleList">
   <happ-rooms-list
     [rooms]="roomsList"
     [title]="roomListTitle"
@@ -70,6 +72,10 @@
     (changeCounter)="setChangeCounter($event)"
   ></happ-rooms-list>
 </ul>
+
+<button class="btn btn-primary" (click)="toggleListHandler()">
+  toggle list
+</button>
 
 <div *ngIf="highlightedRoom">
   <div>You selected {{ highlightedRoom.roomType }}!</div>

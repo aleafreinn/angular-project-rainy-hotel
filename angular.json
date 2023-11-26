@@ -70,7 +70,8 @@
               "browserTarget": "hotelAppv13:build:production"
             },
             "development": {
-              "browserTarget": "hotelAppv13:build:development"
+              "browserTarget": "hotelAppv13:build:development",
+              "proxyConfig": "src/app/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

@@ -6,6 +6,7 @@ import {
   Output,
   EventEmitter,
   SimpleChanges,
+  OnDestroy,
 } from '@angular/core';
 import { RoomType } from '../room';
 
@@ -14,7 +15,7 @@ import { RoomType } from '../room';
   templateUrl: './rooms-list.component.html',
   styleUrls: ['./rooms-list.component.scss'],
 })
-export class RoomsListComponent implements OnInit, OnChanges {
+export class RoomsListComponent implements OnInit, OnChanges, OnDestroy {
   @Input() rooms: RoomType[] = [];
   @Input() title: string = '';
   @Output() roomSelected = new EventEmitter<RoomType>();
@@ -37,5 +38,9 @@ export class RoomsListComponent implements OnInit, OnChanges {
 
   selectRoom(room: RoomType) {
     this.roomSelected.emit(room);
+  }
+
+  ngOnDestroy() {
+    console.log('the list has been disabled.');
   }
 }

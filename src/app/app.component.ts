@@ -1,4 +1,17 @@
-import { Component } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+  Optional,
+  Inject,
+} from '@angular/core';
+import { RoomsComponent } from './rooms/rooms.component';
+import { MyComponentComponent } from './my-component/my-component.component';
+import { localStorageToken } from './localstorage.token';
+import { LoggerService } from './logger.service';
 
 @Component({
   selector: 'happ-root',
@@ -25,12 +38,38 @@ import { Component } from '@angular/core';
   //   `,
   // ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit, AfterViewInit {
   title: string = 'hotelAppv13';
 
   role: string = 'Admin';
 
+  // the "ViewContainerRef" will give some reference based on
+  // the stated container. It will dynamically load the component.
+  @ViewChild('adminRef', { read: ViewContainerRef })
+  adminRef!: ViewContainerRef;
+  @ViewChild('userRef', { read: ViewContainerRef }) userRef!: ViewContainerRef;
+
+  @ViewChild('myTitle', { static: true }) name!: ElementRef;
+
+  constructor(
+    @Optional() private loggerService: LoggerService,
+    @Inject(localStorageToken) private localStorage: Storage
+  ) {}
+
+  ngOnInit() {
+    // console.log(this.name);
+    this.name.nativeElement.innerHTML =
+      '<h2>Hello, im from native element.</h2>';
+    this.localStorage.setItem('name', 'Hilton Hotel');
+  }
+
+  ngAfterViewInit() {
+    const adminComponentRef = this.adminRef.createComponent(RoomsComponent);
+    adminComponentRef.instance.rooms.totalRooms = 25;
+    const userComponentRef = this.userRef.createComponent(MyComponentComponent);
+  }
+
   roleSwitcher() {
-    this.role = this.role === 'User' ? 'Admin' : 'User';
+    this.role = this.role === 'user' ? 'admin' : 'user';
   }
 }

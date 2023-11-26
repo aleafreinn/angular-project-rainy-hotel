@@ -3,11 +3,14 @@ import {
   Component,
   OnInit,
   ViewChild,
+  ViewChildren,
+  QueryList,
   AfterViewInit,
   AfterViewChecked,
 } from '@angular/core';
 import { Modifier, Room, RoomType } from './room';
 import { HeaderComponent } from '../header/header.component';
+import { RoomsService } from './services/rooms.service';
 
 @Component({
   selector: 'happ-rooms',
@@ -32,43 +35,25 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   titleChangeCounter: number = 0;
 
+  toggleList: boolean = true;
+
   // in order to access the component without using and only the purpose of
   // viewing the component, we can use this ViewChild decorator.
-  @ViewChild(HeaderComponent)
+  @ViewChild(HeaderComponent, { static: true })
   headerComponent!: HeaderComponent;
 
-  constructor() {}
+  @ViewChildren(HeaderComponent) HeaderChildren!: QueryList<HeaderComponent>;
+
+  constructor(private roomsService: RoomsService) {}
 
   ngOnInit(): void {
-    this.roomsList = [
-      {
-        roomNum: 1,
-        roomType: 'Normal Room',
-        amenities: 'Air Conditioner, Free Wi-Fi, Normal Shower.',
-        price: 250,
-        date: new Date('2023-10-30'), //for learning purposes only
-        ratings: 1.264056,
-      },
-      {
-        roomNum: 2,
-        roomType: 'Deluxe Room',
-        amenities:
-          'Air Conditioner, Free Wi-Fi, TV, Deluxe Bed, Normal Shower.',
-        price: 315,
-        date: new Date('2023-11-04'),
-        ratings: 3.64963,
-      },
-      {
-        roomNum: 3,
-        roomType: 'Private Room',
-        amenities:
-          'Air Conditioner, Free Wi-Fi, TV, King-Sized Bed, Shower & Bathtub, Kitchen.',
-        price: 400,
-        date: new Date('2023-12-16'),
-        ratings: 14.458284,
-      },
-    ];
     this.roomListTitle = 'List of Rooms';
+
+    this.roomsService.getRooms().subscribe((roomsList) => {
+      this.roomsList = roomsList.map((room) => {
+        return { ...room, date: new Date(room.date) };
+      });
+    });
 
     // If we tried to access the headerComponent properties, we will get
     // undefined due to the headerComponent's ngOnInit is currently being
@@ -81,6 +66,13 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
   ngAfterViewInit() {
     console.log(this.headerComponent);
     this.headerComponent.titleName = 'Rain Roomie Hotel';
+
+    console.log(this.HeaderChildren);
+    // dirty: defines where the component has been changed or not
+    // first: first instance
+    // last: last instance.
+    // this.HeaderChildren.first.titleName = 'this is a first title.';
+    this.HeaderChildren.last.titleName = 'this is a last title.';
   }
 
   ngAfterViewChecked() {}
@@ -106,7 +98,7 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
       amenities:
         'Air Conditioner, Free Wi-Fi, TV, King-Sized Bed, Shower & Bathtub, Kitchen.',
       price: 400,
-      date: new Date('2023-12-16'),
+      date: new Date(2023 - 12 - 16),
       ratings: 14.458284,
     };
 
@@ -122,5 +114,9 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   setChangeCounter(counter: number) {
     this.titleChangeCounter = counter;
+  }
+
+  toggleListHandler() {
+    this.toggleList = !this.toggleList;
   }
 }
