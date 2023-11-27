@@ -64,9 +64,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const adminComponentRef = this.adminRef.createComponent(RoomsComponent);
-    adminComponentRef.instance.rooms.totalRooms = 25;
-    const userComponentRef = this.userRef.createComponent(MyComponentComponent);
+    // const adminComponentRef = this.adminRef.createComponent(RoomsComponent);
+    // adminComponentRef.instance.rooms.totalRooms = 25;
+    // const userComponentRef = this.userRef.createComponent(MyComponentComponent);
   }
 
   roleSwitcher() {

@@ -16,10 +16,12 @@ import { RoomType } from '../room';
   styleUrls: ['./rooms-list.component.scss'],
 })
 export class RoomsListComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() rooms: RoomType[] = [];
+  @Input() rooms: RoomType[] | null = [];
   @Input() title: string = '';
   @Output() roomSelected = new EventEmitter<RoomType>();
   @Output() changeCounter = new EventEmitter<number>();
+  @Output() roomToEdit = new EventEmitter<RoomType>();
+  @Output() roomToDelete = new EventEmitter<RoomType>();
 
   countChange: number = 0;
 
@@ -38,6 +40,15 @@ export class RoomsListComponent implements OnInit, OnChanges, OnDestroy {
 
   selectRoom(room: RoomType) {
     this.roomSelected.emit(room);
+  }
+
+  editRoom(room: RoomType) {
+    const newRoom: RoomType = { ...room, date: new Date() };
+    this.roomToEdit.emit(newRoom);
+  }
+
+  deleteRoom(room: RoomType) {
+    this.roomToDelete.emit(room);
   }
 
   ngOnDestroy() {

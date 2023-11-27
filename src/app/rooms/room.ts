@@ -10,6 +10,7 @@ export interface Modifier {
 }
 
 export interface RoomType {
+  id?: number;
   roomNum: number;
   roomType: string;
   amenities: string;

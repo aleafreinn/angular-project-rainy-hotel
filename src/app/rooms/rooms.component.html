@@ -1,8 +1,11 @@
+<h1>{{ totalBytes }} bytes has been loaded</h1>
+
 <happ-header></happ-header>
 <happ-header></happ-header>
 <happ-header></happ-header>
 <h2>Rooms details</h2>
 <hr />
+<!-- {{ rooms$ | async | json }} -->
 
 <!-- <div [innerText]="numberOfRooms"></div> -->
 
@@ -65,11 +68,16 @@
 </div>
 
 <ul *ngIf="toggleList">
+  <h3>
+    {{ getError$ | async }}
+  </h3>
   <happ-rooms-list
-    [rooms]="roomsList"
+    [rooms]="roomsList$ | async"
     [title]="roomListTitle"
     (roomSelected)="selectRoom($event)"
     (changeCounter)="setChangeCounter($event)"
+    (roomToEdit)="editRooms($event)"
+    (roomToDelete)="deleteRoom($event)"
   ></happ-rooms-list>
 </ul>
 

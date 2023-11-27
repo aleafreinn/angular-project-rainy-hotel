@@ -5,12 +5,12 @@ import { RoomsService } from '../rooms/services/rooms.service';
   selector: 'happ-exterior',
   templateUrl: './exterior.component.html',
   styleUrls: ['./exterior.component.scss'],
-  providers: [RoomsService],
+  // providers: [RoomsService],
 })
 export class ExteriorComponent implements OnInit {
   empName: string = 'John';
 
-  constructor(@Self() private roomsService: RoomsService) {}
+  constructor(/* @Self() private roomsService: RoomsService */) {}
 
   ngOnInit(): void {}
 }

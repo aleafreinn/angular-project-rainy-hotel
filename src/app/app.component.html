@@ -28,9 +28,10 @@
         I am accessing this from app component using ng-content!
       </p>
     </happ-exterior>
+    <happ-rooms></happ-rooms>
     <!-- <div *ngIf="role === 'user'; then userRef; else adminRef"></div> -->
-    <ng-template #adminRef></ng-template>
-    <ng-template #userRef></ng-template>
+    <!-- <ng-template #adminRef></ng-template> -->
+    <!-- <ng-template #userRef></ng-template> -->
     <button class="btn btn-secondary" (click)="roleSwitcher()">
       Click me to change role. Current Role: {{ role }}
     </button>
