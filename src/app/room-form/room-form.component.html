@@ -1,0 +1,55 @@
+<!-- <p>room-form works!</p> -->
+<form [formGroup]="newRoom" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="roomType">Enter Type of Room:</label>
+    <input type="text" id="roomType" formControlName="roomType" />
+    <div
+      *ngIf="
+        newRoom.controls['roomType'].errors &&
+        (newRoom.controls['roomType'].dirty ||
+          newRoom.controls['roomType'].touched)
+      "
+    >
+      Room type must not be empty.
+    </div>
+  </div>
+  <div>
+    <label for="amenities">Enter amenities:</label>
+    <input type="text" id="amenities" formControlName="amenities" />
+    <div
+      *ngIf="
+        newRoom.controls['amenities'].errors &&
+        (newRoom.controls['amenities'].dirty ||
+          newRoom.controls['amenities'].touched)
+      "
+    >
+      Room type must not be empty.
+    </div>
+  </div>
+  <div>
+    <label for="price">Enter price:</label>
+    <input type="number" id="price" formControlName="price" />
+    <div
+      *ngIf="
+        newRoom.controls['price'].errors &&
+        (newRoom.controls['price'].dirty || newRoom.controls['price'].touched)
+      "
+    >
+      Room type must not be empty.
+    </div>
+  </div>
+  <div>
+    <label for="ratings">Enter ratings:</label>
+    <input type="number" id="ratings" formControlName="ratings" />
+    <div
+      *ngIf="
+        newRoom.controls['ratings'].errors &&
+        (newRoom.controls['ratings'].dirty ||
+          newRoom.controls['ratings'].touched)
+      "
+    >
+      Room type must not be empty.
+    </div>
+  </div>
+  <button type="submit" [disabled]="!newRoom.valid">add new room!</button>
+</form>

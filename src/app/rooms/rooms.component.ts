@@ -27,7 +27,7 @@ import { HttpEventType } from '@angular/common/http';
   // providers: [RoomsService],
 })
 export class RoomsComponent
-  implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy
+  implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy, OnChanges
 {
   // numberOfRooms = 10;
 
@@ -94,6 +94,11 @@ export class RoomsComponent
   @ViewChildren(HeaderComponent) HeaderChildren!: QueryList<HeaderComponent>;
 
   constructor(@SkipSelf() private roomsService: RoomsService) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['roomsList']) {
+      console.log('ROOMS CHANGED');
+    }
+  }
 
   ngOnInit(): void {
     // console.log(this.rooms$); // this will log as an observable.
@@ -107,11 +112,11 @@ export class RoomsComponent
 
     // this.stream.subscribe((data) => console.log(data));
 
-    // this.subscription = this.roomsService.getRooms$.subscribe((roomsList) => {
-    //   this.roomsList = roomsList.map((room) => {
-    //     return { ...room, date: new Date(room.date) };
-    //   });
-    // });
+    this.subscription = this.roomsService.getRooms$.subscribe((roomsList) => {
+      this.roomsList = roomsList.map((room) => {
+        return { ...room, date: new Date(room.date) };
+      });
+    });
 
     // httpRequest:
 
@@ -203,8 +208,16 @@ export class RoomsComponent
 
   editRooms(roomTarget: RoomType) {
     // console.log(roomTarget);
-    this.subscription = this.roomsService
+    this.roomsService
       .editRoom(roomTarget)
+      // .pipe(
+      //   // map((roomsList) => roomsList.map((room)=> {
+      //   //   if (room.id === roomTarget.id) {
+      //   //     return { ...roomTarget };
+      //   //   } else return room;
+      //   // }))
+      // );
+      // .subscribe();
       .subscribe((data) => {
         this.roomsList = this.roomsList.map((room) => {
           if (room.id === data.id) {
@@ -213,6 +226,7 @@ export class RoomsComponent
         });
         console.log(this.roomsList);
       });
+    console.log(this.anoRoomsList$);
   }
 
   deleteRoom(roomTarget: RoomType) {
@@ -239,6 +253,11 @@ export class RoomsComponent
 
   toggleListHandler() {
     this.toggleList = !this.toggleList;
+  }
+
+  addNewRoom(newList: RoomType[]) {
+    this.roomsList = newList;
+    console.log('i am triggered', newList);
   }
 
   // So, every destroyed component will get unsubscribe for the active ones.

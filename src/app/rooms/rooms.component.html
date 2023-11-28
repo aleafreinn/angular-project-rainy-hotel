@@ -72,7 +72,7 @@
     {{ getError$ | async }}
   </h3>
   <happ-rooms-list
-    [rooms]="roomsList$ | async"
+    [rooms]="roomsList"
     [title]="roomListTitle"
     (roomSelected)="selectRoom($event)"
     (changeCounter)="setChangeCounter($event)"
@@ -80,6 +80,11 @@
     (roomToDelete)="deleteRoom($event)"
   ></happ-rooms-list>
 </ul>
+
+<happ-room-form
+  [rooms]="roomsList"
+  (modifiedRooms)="addNewRoom($event)"
+></happ-room-form>
 
 <button class="btn btn-primary" (click)="toggleListHandler()">
   toggle list
